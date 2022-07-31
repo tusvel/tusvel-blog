@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/static', express.static(path.resolve('src/static')));
+app.use('/avatar', express.static(path.resolve('src/avatar')));
 app.use('/', router);
 
 app.listen(5000, (err) => {

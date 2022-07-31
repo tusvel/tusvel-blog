@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const sliceAuth = createSlice({
-  name: 'posts',
+  name: 'user',
   initialState,
   reducers: {
     logout: (state, action) => {

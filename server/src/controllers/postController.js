@@ -1,4 +1,3 @@
-import { validationResult } from 'express-validator';
 import PostModel from '../models/Post.js';
 
 class PostController {
@@ -7,7 +6,7 @@ class PostController {
       const doc = new PostModel({
         title: req.body.title,
         text: req.body.text,
-        tags: req.body.tags?.split(','),
+        tags: req.body.tags && req.body.tags?.split(','),
         viewsCount: req.body.viewsCount,
         user: req.userId,
         imageUrl: req.body.imageUrl,
@@ -98,7 +97,7 @@ class PostController {
         {
           title: req.body.title,
           text: req.body.text,
-          tags: req.body.tags?.split(','),
+          tags: req.body.tags && req.body.tags?.split(','),
           viewsCount: req.body.viewsCount,
           user: req.userId,
           imageUrl: req.body.imageUrl,
@@ -114,11 +113,9 @@ class PostController {
   }
   async getTags(req, res) {
     try {
-      const posts = await PostModel.find().limit(5);
+      const posts = await PostModel.find().limit(10).distinct('tags');
 
-      const tags = posts?.map((obj) => obj.tags).flat();
-
-      return res.json(tags);
+      return res.json(posts);
     } catch (err) {
       console.log(err);
       return res.status(500).json('Не удалось получить теги');

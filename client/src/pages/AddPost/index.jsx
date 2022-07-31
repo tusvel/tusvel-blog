@@ -59,7 +59,7 @@ export const AddPost = () => {
       setLoading(true);
       const fields = {
         title,
-        tags: isEditing ? tags.join(',') : tags,
+        tags: isEditing ? tags && tags.join(',') : tags ? tags : null,
         text: value,
         imageUrl,
       };
@@ -104,7 +104,11 @@ export const AddPost = () => {
         </Button>
       )}
       {imageUrl && (
-        <img className={styles.image} src={`http://localhost:5000${imageUrl}`} alt="Uploaded" />
+        <img
+          className={styles.image}
+          src={imageUrl && `http://localhost:5000${imageUrl}`}
+          alt="Uploaded"
+        />
       )}
       <br />
       <br />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -7,18 +7,31 @@ import Avatar from '@mui/material/Avatar';
 
 import styles from './Login.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLogin, fetchRegister, selectIsAuth } from '../../redux/slices/user';
+import { fetchRegister, selectIsAuth } from '../../redux/slices/user';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import { $host } from '../../http';
 
 export const Registration = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+  const inputFileRef = useRef(null);
+  const [imageUrl, setImageUrl] = useState('');
+  const handleChangeFile = async (event) => {
+    try {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      const { data } = await $host.post('/users/upload', formData);
+      setImageUrl(data.url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -29,8 +42,10 @@ export const Registration = () => {
     mode: 'onChange',
   });
 
+  const avatarUrl = imageUrl ? `http://localhost:5000${imageUrl}` : '';
+
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchRegister(values));
+    const data = await dispatch(fetchRegister({ ...values, avatarUrl }));
     if (!data.payload) {
       return console.log('Ошибка регистрации');
     }
@@ -52,8 +67,14 @@ export const Registration = () => {
           Создание аккаунта
         </Typography>
         <div className={styles.avatar}>
-          <Avatar sx={{ width: 100, height: 100 }} />
+          <Avatar
+            onClick={() => inputFileRef.current.click()}
+            style={{ cursor: 'pointer' }}
+            sx={{ width: 100, height: 100 }}
+            src={imageUrl && `http://localhost:5000${imageUrl}`}
+          />
         </div>
+        <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
         <TextField
           className={styles.field}
           label="Полное имя"

@@ -4,11 +4,15 @@ import { useParams } from 'react-router-dom';
 import { $host } from '../http';
 import { Post, Index, CommentsBlock } from '../components';
 import ReactMarkdown from 'react-markdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCommentById } from '../redux/slices/comment';
 
 export const FullPost = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const comments = useSelector((state) => state.comment.comments);
 
   useEffect(() => {
     $host
@@ -20,6 +24,7 @@ export const FullPost = () => {
       .catch((err) => {
         console.log(err);
       });
+    dispatch(getCommentById({ post: id }));
   }, []);
 
   if (isLoading) {
@@ -40,24 +45,7 @@ export const FullPost = () => {
         isFullPost>
         <ReactMarkdown children={data.text} />
       </Post>
-      <CommentsBlock
-        items={[
-          {
-            user: {
-              fullName: 'Вася Пупкин',
-              avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
-            },
-            text: 'Это тестовый комментарий 555555',
-          },
-          {
-            user: {
-              fullName: 'Иван Иванов',
-              avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
-            },
-            text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
-          },
-        ]}
-        isLoading={false}>
+      <CommentsBlock items={comments} isLoading={false}>
         <Index />
       </CommentsBlock>
     </>
