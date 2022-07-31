@@ -42,7 +42,7 @@ export const Registration = () => {
     mode: 'onChange',
   });
 
-  const avatarUrl = imageUrl ? `http://localhost:5000${imageUrl}` : '';
+  const avatarUrl = imageUrl ? `${process.env.REACT_APP_API_URL}${imageUrl}` : '';
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister({ ...values, avatarUrl }));
@@ -71,7 +71,7 @@ export const Registration = () => {
             onClick={() => inputFileRef.current.click()}
             style={{ cursor: 'pointer' }}
             sx={{ width: 100, height: 100 }}
-            src={imageUrl && `http://localhost:5000${imageUrl}`}
+            src={imageUrl && `${process.env.REACT_APP_API_URL}${imageUrl}`}
           />
         </div>
         <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
