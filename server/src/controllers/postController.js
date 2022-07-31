@@ -28,6 +28,15 @@ class PostController {
       return res.status(500).json('Ошибка получения всех статей');
     }
   }
+  async getAllByTag(req, res) {
+    try {
+      const posts = await PostModel.find({ tags: { $in: [req.params.tag] } }).populate('user');
+      return res.json(posts);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json('Ошибка получения всех статей');
+    }
+  }
   async getOne(req, res) {
     try {
       const postId = req.params.id;
@@ -114,8 +123,11 @@ class PostController {
   async getTags(req, res) {
     try {
       const posts = await PostModel.find().limit(10).distinct('tags');
+      const items = posts?.filter((item) => {
+        return item !== null;
+      });
 
-      return res.json(posts);
+      return res.json(items);
     } catch (err) {
       console.log(err);
       return res.status(500).json('Не удалось получить теги');

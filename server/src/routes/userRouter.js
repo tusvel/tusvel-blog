@@ -22,7 +22,7 @@ userRouter.post('/login', loginValidation, handleErrors, userController.login);
 userRouter.get('/check', checkAuth, userController.check);
 userRouter.post('/upload', upload.single('image'), (req, res) => {
   return res.json({
-    url: `/avatar/${req.file.originalname}`,
+    url: `avatar/${req.file.originalname}`,
   });
 });
 

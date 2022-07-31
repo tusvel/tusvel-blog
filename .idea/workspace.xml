@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c534b8d-72ed-4059-9da5-e68c3adacf02" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/postController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/postController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/routes/postRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routes/postRouter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/routes/userRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routes/userRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/utils/handleErrors.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/utils/handleErrors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/validations/authValidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/validations/authValidate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/validations/postValidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/validations/postValidate.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/server" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/client/src/pages/Login/index.jsx" root0="FORCE_HIGHLIGHTING" />
@@ -93,7 +91,7 @@
       <workItem from="1658818186441" duration="128000" />
       <workItem from="1658818556512" duration="42528000" />
       <workItem from="1659049443201" duration="14823000" />
-      <workItem from="1659234475212" duration="13119000" />
+      <workItem from="1659234475212" duration="25136000" />
     </task>
     <servers />
   </component>
