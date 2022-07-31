@@ -5,6 +5,11 @@ export const fetchPosts = async () => {
   return data;
 };
 
+export const fetchPostsByTag = async (tag) => {
+  const { data } = await $host.get(`/posts/getAllByTag/${tag}`);
+  return data;
+};
+
 export const fetchTags = async () => {
   const { data } = await $host.get('/posts/tags');
   return data;

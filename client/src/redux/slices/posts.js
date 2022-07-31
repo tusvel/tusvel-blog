@@ -1,8 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchPosts, fetchRemovePost, fetchTags } from '../../http/posts';
+import { fetchPosts, fetchPostsByTag, fetchRemovePost, fetchTags } from '../../http/posts';
 
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
   return await fetchPosts();
+});
+
+export const getPostsByTag = createAsyncThunk('posts/getPostsByTag', async (tag) => {
+  return await fetchPostsByTag(tag);
 });
 
 export const getTags = createAsyncThunk('posts/getTags', async () => {
@@ -60,6 +64,20 @@ const slicePosts = createSlice({
     //Удаление поста
     [removePost.pending]: (state, action) => {
       state.posts.items = state.posts.items.filter((obj) => obj._id !== action.meta.arg);
+    },
+
+    //Получение постов по тегу
+    [getPostsByTag.pending]: (state) => {
+      state.posts.items = null;
+      state.posts.status = 'loading';
+    },
+    [getPostsByTag.fulfilled]: (state, action) => {
+      state.posts.items = action.payload;
+      state.posts.status = 'loaded';
+    },
+    [getPostsByTag.rejected]: (state) => {
+      state.posts.items = null;
+      state.posts.status = 'error';
     },
   },
 });

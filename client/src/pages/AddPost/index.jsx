@@ -20,7 +20,6 @@ export const AddPost = () => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const inputFileRef = useRef(null);
-  const [loading, setLoading] = useState(false);
   const handleChangeFile = async (event) => {
     try {
       const file = event.target.files[0];
@@ -42,7 +41,7 @@ export const AddPost = () => {
         setTags(data.tags);
       });
     }
-  }, []);
+  }, [id]);
 
   const onClickRemoveImage = () => {
     setImageUrl('');
@@ -56,7 +55,6 @@ export const AddPost = () => {
 
   const onSubmit = async () => {
     try {
-      setLoading(true);
       const fields = {
         title,
         tags: isEditing ? tags && tags.join(',') : tags ? tags : null,
